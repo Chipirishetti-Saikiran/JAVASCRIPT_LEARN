@@ -1,0 +1,287 @@
+
+## 📌 What is an Event?
+
+An **event** is any interaction or occurrence that the browser can detect in the document.
+Examples:
+
+* Clicking a button
+* Typing in an input field
+* Moving the mouse
+* Submitting a form
+* Page loading
+
+---
+
+
+
+
+
+
+
+
+## 📋 Common Event Types
+
+| Event       | Triggered When                          |
+| ----------- | --------------------------------------- |
+| `click`     | Element is clicked                      |
+| `dblclick`  | Element is double-clicked               |
+| `mouseover` | Mouse enters an element                 |
+| `mouseout`  | Mouse leaves an element                 |
+| `mousemove` | Mouse moves over an element             |
+| `keydown`   | Key is pressed                          |
+| `keyup`     | Key is released                         |
+| `keypress`  | Key is pressed (legacy)                 |
+| `submit`    | Form is submitted                       |
+| `change`    | Value changes (input, select, textarea) |
+| `focus`     | Input element gains focus               |
+| `blur`      | Input element loses focus               |
+| `load`      | Page finishes loading                   |
+| `resize`    | Window is resized                       |
+| `scroll`    | Scroll happens in window/element        |
+
+---
+
+
+
+
+
+
+
+
+## 🧠 Ways to Add Events
+
+### 1. **Inline in HTML (Not Recommended)**
+
+```html
+<button onclick="alert('Hello')">Click</button>
+```
+
+
+
+### 2. **Via DOM element’s property**
+
+```js
+const btn = document.getElementById("myBtn");
+btn.onclick = function () {
+  alert("Button clicked");
+};
+```
+
+
+
+
+* ❌ Overwrites any previous `onclick` handler.
+
+### 3. **Using `addEventListener()` ✅ Recommended**
+
+```js
+btn.addEventListener("click", function () {
+  alert("Clicked using addEventListener");
+});
+```
+
+
+
+
+* ✅ Can add multiple listeners.
+* ✅ Can remove specific listeners.
+
+---
+
+## 🧪 Example
+
+```html
+<button id="myBtn">Click Me</button>
+
+<script>
+  const btn = document.getElementById("myBtn");
+
+  btn.addEventListener("click", () => {
+    console.log("Button was clicked!");
+  });
+</script>
+```
+
+
+
+
+---
+
+## 🎯 Event Object (`event`)
+
+Whenever an event happens, a special object is passed to the event handler — the **event object**.
+
+### Common properties:
+
+| Property                  | Description                                              |
+| ------------------------- | -------------------------------------------------------- |
+| `event.type`              | Type of event (e.g., 'click')                            |
+| `event.target`            | Element that triggered the event                         |
+| `event.currentTarget`     | Element that has the event listener                      |
+| `event.clientX / clientY` | Mouse position (x, y) on screen                          |
+| `event.key`               | Key pressed during keyboard events                       |
+| `event.preventDefault()`  | Cancels default behavior (e.g., prevent form submission) |
+| `event.stopPropagation()` | Stops bubbling to parent elements                        |
+
+```js
+btn.addEventListener("click", function (event) {
+  console.log(event.target); // logs the clicked element
+});
+```
+
+
+
+
+---
+
+## 🧭 Event Propagation
+
+There are **two main phases**:
+
+### 1. **Capturing Phase (trickles down)**
+
+* From the root (`document`) to the target element.
+
+### 2. **Bubbling Phase (bubbles up)**
+
+* From the target element back up to the root.
+
+```js
+element.addEventListener("click", handler, true); // Capturing phase
+element.addEventListener("click", handler); // Bubbling phase (default)
+```
+
+---
+
+
+
+
+
+## 🛑 `stopPropagation()` and `preventDefault()`
+
+### `event.preventDefault()`
+
+Stops default behavior:
+
+```js
+document.querySelector("a").addEventListener("click", function (e) {
+  e.preventDefault(); // Stops the link from navigating
+});
+```
+
+### `event.stopPropagation()`
+
+Prevents bubbling up:
+
+```js
+child.addEventListener("click", function (e) {
+  e.stopPropagation();
+});
+```
+
+---
+
+
+
+
+
+## 🔁 Removing an Event Listener
+
+```js
+function greet() {
+  alert("Hello!");
+}
+
+btn.addEventListener("click", greet);
+
+// Later...
+btn.removeEventListener("click", greet);
+```
+
+> Note: `removeEventListener` only works if the function is **named** or **stored** in a variable.
+
+---
+
+
+
+
+## ⚡ Keyboard Events
+
+```js
+document.addEventListener("keydown", function (e) {
+  console.log("Key pressed:", e.key);
+});
+```
+
+---
+
+## 🧩 Mouse Events
+
+| Event       | Description           |
+| ----------- | --------------------- |
+| `click`     | Mouse click           |
+| `dblclick`  | Double click          |
+| `mousedown` | Mouse button pressed  |
+| `mouseup`   | Mouse button released |
+| `mousemove` | Mouse moved           |
+| `mouseover` | Mouse enters element  |
+| `mouseout`  | Mouse leaves element  |
+
+---
+
+
+
+
+
+
+
+## ✅ Form Events
+
+```js
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault(); // Prevents page reload
+  alert("Form submitted!");
+});
+```
+
+---
+
+
+
+
+
+
+## 🔄 Event Delegation (Advanced)
+
+Attach one event listener to a parent and handle events from children.
+
+```js
+document.getElementById("list").addEventListener("click", function (e) {
+  if (e.target.tagName === "LI") {
+    e.target.style.color = "blue";
+  }
+});
+```
+
+✅ Saves memory
+✅ Useful for dynamic elements
+
+---
+
+
+
+
+## 🧾 Summary
+
+| Concept                   | Purpose                                    |
+| ------------------------- | ------------------------------------------ |
+| Event                     | User/browser action                        |
+| Event Listener            | Executes function when event occurs        |
+| `addEventListener()`      | Modern way to attach events                |
+| `event.preventDefault()`  | Stops default action                       |
+| `event.stopPropagation()` | Stops event from bubbling                  |
+| Event Delegation          | Handle multiple children with one listener |
+
+---
+
+

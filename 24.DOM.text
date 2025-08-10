@@ -1,0 +1,265 @@
+Window Object: The window Object represents an open window in a browser. Its is s a browsers object not a js and is automatically created by browser.
+It is a global object with lots of properties and methods.
+
+when a web page is loaded,the browser creates a DOM of the page.
+
+
+
+## ✅ What is the DOM?
+
+**DOM stands for Document Object Model.**
+
+It is a **programming interface** provided by the browser that represents an HTML (or XML) document as a **tree structure** of **objects**.
+
+
+The DOM will represent this as a **tree** like:
+
+Document
+ └── html
+     ├── head
+     │   └── title
+     └── body
+         ├── h1
+         └── p
+
+## 🔍 Why is the DOM important?
+
+With the DOM, **JavaScript can:**
+
+* Change the content (`innerHTML`)
+* Change the structure (add/remove elements)
+* Change the styles (CSS)
+* React to events (clicks, inputs, etc.)
+
+---
+
+## 🧱 DOM Components
+
+1. **Document** – The root of the DOM tree.
+2. **Elements (Nodes)** – HTML tags like `<body>`, `<div>`, `<h1>`, etc.
+3. **Attributes** – Like `class`, `id`, `href`, etc.
+4. **Text Nodes** – The text inside the tags.
+
+---
+
+## ⚙️ Accessing the DOM with JavaScript
+
+```javascript
+console.log(document); // The whole HTML document
+```
+
+---
+
+## 📌 DOM Tree Basics
+
+Everything in the DOM is a **node**:
+
+| Node Type      | Description                      |
+| -------------- | -------------------------------- |
+| Element Node   | HTML elements (`<div>`, `<p>`)   |
+| Text Node      | Text inside elements             |
+| Attribute Node | Attributes (`id`, `class`, etc.) |
+| Comment Node   | Comments in HTML (`<!-- -->`)    |
+
+---
+
+## 🛠️ DOM Manipulation Methods
+
+### 1. **Selecting Elements**
+
+| Method                     | Description                            |
+| -------------------------- | -------------------------------------- |
+| `getElementById()`         | Selects by ID                          |
+| `getElementsByClassName()` | Selects by class (HTMLCollection)      |
+| `getElementsByTagName()`   | Selects by tag name                    |
+| `querySelector()`          | Selects the first match (CSS selector) |
+| `querySelectorAll()`       | Selects all matches (NodeList)         |
+
+```js
+const para = document.getElementById('myPara');
+const boxes = document.querySelectorAll('.box');
+```
+
+
+
+---
+
+### 2. **Changing Content and Attributes**
+
+```js
+element.innerHTML = "New content";
+element.textContent = "Only text";
+
+element.setAttribute("id", "newId");
+element.getAttribute("class");
+element.removeAttribute("style");
+```
+
+
+
+
+---
+
+### 3. **Changing Styles (CSS)**
+
+```js
+element.style.color = "blue";
+element.style.backgroundColor = "yellow";
+```
+
+
+
+
+---
+
+### 4. **Working with Classes**
+
+```js
+element.classList.add("new-class");
+element.classList.remove("old-class");
+element.classList.toggle("active");
+element.classList.contains("dark"); // returns true/false
+```
+
+
+
+
+---
+
+### 5. **Creating and Adding Elements**
+
+```js
+const newDiv = document.createElement("div");
+newDiv.textContent = "I'm a new div";
+document.body.appendChild(newDiv); // Adds to the end
+```
+
+
+
+
+---
+
+### 6. **Removing Elements**
+
+```js
+element.remove();
+```
+
+
+
+
+---
+
+### 7. **Event Handling**
+
+```js
+const btn = document.querySelector("#myBtn");
+
+btn.addEventListener("click", function () {
+  alert("Button clicked!");
+});
+```
+
+
+
+
+---
+
+## 📂 DOM Properties (Common)
+
+| Property                 | Description                |
+| ------------------------ | -------------------------- |
+| `innerHTML`              | HTML content of an element |
+| `textContent`            | Text content of an element |
+| `children`               | List of child elements     |
+| `parentElement`          | Parent of an element       |
+| `nextElementSibling`     | Next sibling element       |
+| `previousElementSibling` | Previous sibling           |
+| `style`                  | Access inline CSS styles   |
+
+---
+
+
+
+
+
+## 🧠 Advanced Concepts
+
+### 1. **Event Delegation**
+
+Use a single event listener on a parent instead of multiple on children.
+
+```js
+document.getElementById("parent").addEventListener("click", function(e) {
+  if (e.target.tagName === "BUTTON") {
+    alert("Button clicked: " + e.target.textContent);
+  }
+});
+```
+
+
+
+
+
+
+
+---
+
+### 2. **Traversing the DOM**
+
+```js
+element.parentElement
+element.children
+element.firstElementChild
+element.lastElementChild
+element.nextElementSibling
+element.previousElementSibling
+```
+
+
+
+
+
+
+---
+
+### 3. **Node vs Element**
+
+* A **Node** is any point in the DOM tree (text, comment, element).
+* An **Element** is a specific type of Node (HTML tag).
+
+---
+
+
+
+
+
+
+
+### 4. **Mutation (Live Updates)**
+
+* `getElementsByClassName()` returns a **live** HTMLCollection.
+* `querySelectorAll()` returns a **static** NodeList.
+
+---
+
+
+
+
+
+
+
+
+
+### 5. **innerHTML vs textContent vs innerText**
+
+| Property      | Returns      | Parses HTML? | Includes Hidden Text? |
+| ------------- | ------------ | ------------ | --------------------- |
+| `innerHTML`   | HTML         | ✅ Yes        | ✅ Yes                 |
+| `textContent` | Text         | ❌ No         | ✅ Yes                 |
+| `innerText`   | Visible Text | ❌ No         | ❌ No (ignores hidden) |
+
+---
+
+
+

@@ -1,0 +1,5 @@
+Javascript is a synchronous,single-threaded,interpreted and dynamically typed programming language.
+
+synchronous means it executes one line at a time,in the order it apperas.
+
+Javascript uses a single call stack it can only run one task at a time.
